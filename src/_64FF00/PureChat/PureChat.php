@@ -8,6 +8,7 @@ use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\player\chat\LegacyRawChatFormatter;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use pocketmine\world\World;
@@ -263,12 +264,14 @@ class PureChat extends PluginBase
         return $string;
     }
 
-    public function getChatFormat(Player $player, ?string $message, ?string $WorldName = null): string
+     public function getChatFormat(Player $player, ?string $message, ?string $WorldName = null): LegacyRawChatFormatter
     {
         $originalChatFormat = $this->getOriginalChatFormat($player, $WorldName);
         $chatFormat = $this->applyColors($originalChatFormat);
         $chatFormat = $this->applyPCTags($chatFormat, $player, $message, $WorldName);
-        return $chatFormat;
+         $formattedChat = new LegacyRawChatFormatter($chatFormat);
+
+        return $formattedChat;
     }
 
     public function getNametag(Player $player, ?string $WorldName = null): string
