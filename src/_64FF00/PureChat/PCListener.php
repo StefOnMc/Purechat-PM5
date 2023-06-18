@@ -70,6 +70,6 @@ class PCListener implements Listener
         $message = $event->getMessage();
         $WorldName = $this->plugin->getConfig()->get("enable-multiworld-chat") ? $player->getWorld()->getDisplayName() : null;
         $chatFormat = $this->plugin->getChatFormat($player, $message, $WorldName);
-        $event->setFormat($chatFormat);
+        $event->setFormatter($chatFormat);
     }
 }
